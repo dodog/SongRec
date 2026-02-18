@@ -62,7 +62,7 @@ https://hughsie.github.io/oars/index.html
       <description>
         <p>Reduce song history load time when the history is large (issue #224)</p>
         <p>Drop reqwest for libsoup for network requests, this will make the binary and the compile time smaller</p>
-        <p>Make the network code asynchronous (isue #223)</p>
+        <p>Make the network code asynchronous (issue #223)</p>
         <p>Increase the default request interval from 4 to 10 seconds to decrease the odds of rate-limiting, and make it fully configurable (issues #222, #154, #164, #218)</p>
         <p>Try a colorful icon</p>
         <p>Implement more standard shortcuts for GNOME Circle criteria compliance</p>
