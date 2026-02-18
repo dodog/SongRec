@@ -111,42 +111,42 @@ pub async fn http_task(
                 match try_recognize_song(&session, *signature).await {
                     Ok(recognized_song) => {
                         gui_tx
-                            .send_blocking(GUIMessage::SongRecognized(Box::new(recognized_song)))
+                            .try_send(GUIMessage::SongRecognized(Box::new(recognized_song)))
                             .unwrap();
                         gui_tx
-                            .send_blocking(GUIMessage::NetworkStatus(true))
+                            .try_send(GUIMessage::NetworkStatus(true))
                             .unwrap();
                         gui_tx
-                            .send_blocking(GUIMessage::RateLimitState(false))
+                            .try_send(GUIMessage::RateLimitState(false))
                             .unwrap();
                     }
                     Err(error) => match error.to_string().as_str() {
                         a if a == gettext("No match for this song") => {
                             gui_tx
-                                .send_blocking(GUIMessage::ErrorMessage(error.to_string()))
+                                .try_send(GUIMessage::ErrorMessage(error.to_string()))
                                 .unwrap();
                             gui_tx
-                                .send_blocking(GUIMessage::NetworkStatus(true))
+                                .try_send(GUIMessage::NetworkStatus(true))
                                 .unwrap();
                             gui_tx
-                                .send_blocking(GUIMessage::RateLimitState(false))
+                                .try_send(GUIMessage::RateLimitState(false))
                                 .unwrap();
                         }
                         a if a == gettext("Your IP has been rate-limited") => {
                             gui_tx
-                                .send_blocking(GUIMessage::RateLimitState(true))
+                                .try_send(GUIMessage::RateLimitState(true))
                                 .unwrap();
                         }
                         _ => {
                             gui_tx
-                                .send_blocking(GUIMessage::NetworkStatus(false))
+                                .try_send(GUIMessage::NetworkStatus(false))
                                 .unwrap();
                         }
                     },
                 };
 
                 microphone_tx
-                    .send_blocking(MicrophoneMessage::ProcessingDone)
+                    .try_send(MicrophoneMessage::ProcessingDone)
                     .unwrap();
             }
         }

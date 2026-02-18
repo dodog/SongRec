@@ -93,8 +93,7 @@ pub fn cli_main(parameters: CLIParameters) -> Result<(), Box<dyn Error>> {
 
     if let Some(ref filename) = parameters.input_file {
         processing_tx
-            .send_blocking(ProcessingMessage::ProcessAudioFile(filename.to_string()))
-            .unwrap();
+            .try_send(ProcessingMessage::ProcessAudioFile(filename.to_string())).unwrap();
     }
 
     let main_loop = glib::MainLoop::new(None, false);
@@ -132,7 +131,7 @@ pub fn cli_main(parameters: CLIParameters) -> Result<(), Box<dyn Error>> {
                     };
                     info!("{} {}", gettext("Using device"), dev_name);
                     microphone_tx
-                        .send_blocking(MicrophoneMessage::MicrophoneRecordStart(
+                        .try_send(MicrophoneMessage::MicrophoneRecordStart(
                             dev_name.to_owned(),
                         ))
                         .unwrap();

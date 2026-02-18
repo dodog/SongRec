@@ -33,7 +33,7 @@ impl Write for GUIDispatcher {
         #[cfg(feature = "gui")]
         if let Some(ref gui_tx) = *self.gui_tx.lock().unwrap() {
             gui_tx
-                .send_blocking(GUIMessage::AppendToLog(
+                .try_send(GUIMessage::AppendToLog(
                     String::from_utf8_lossy(buf).into_owned(),
                 ))
                 .unwrap();

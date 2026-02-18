@@ -191,7 +191,7 @@ impl App {
                     let file_path_string = file_path.into_os_string().into_string().unwrap();
 
                     processing_tx
-                        .send_blocking(ProcessingMessage::ProcessAudioFile(file_path_string))
+                        .try_send(ProcessingMessage::ProcessAudioFile(file_path_string))
                         .unwrap();
                 }
             }
@@ -300,10 +300,10 @@ impl App {
                         }
                     } else {
                         microphone_tx
-                            .send_blocking(MicrophoneMessage::MicrophoneRecordStop)
+                            .try_send(MicrophoneMessage::MicrophoneRecordStop)
                             .unwrap();
                         microphone_tx
-                            .send_blocking(MicrophoneMessage::MicrophoneRecordStart(
+                            .try_send(MicrophoneMessage::MicrophoneRecordStart(
                                 current_device.inner_name().to_owned(),
                             ))
                             .unwrap();
@@ -312,7 +312,7 @@ impl App {
             } else if !microphone_switch.is_active() && !loopback_switch.is_active() {
                 device_section.set_visible(false);
                 microphone_tx
-                    .send_blocking(MicrophoneMessage::MicrophoneRecordStop)
+                    .try_send(MicrophoneMessage::MicrophoneRecordStop)
                     .unwrap();
             }
 
@@ -355,10 +355,10 @@ impl App {
                         }
                     } else {
                         microphone_tx
-                            .send_blocking(MicrophoneMessage::MicrophoneRecordStop)
+                            .try_send(MicrophoneMessage::MicrophoneRecordStop)
                             .unwrap();
                         microphone_tx
-                            .send_blocking(MicrophoneMessage::MicrophoneRecordStart(
+                            .try_send(MicrophoneMessage::MicrophoneRecordStart(
                                 current_device.inner_name().to_owned(),
                             ))
                             .unwrap();
@@ -367,7 +367,7 @@ impl App {
             } else if !microphone_switch.is_active() && !loopback_switch.is_active() {
                 device_section.set_visible(false);
                 microphone_tx
-                    .send_blocking(MicrophoneMessage::MicrophoneRecordStop)
+                    .try_send(MicrophoneMessage::MicrophoneRecordStop)
                     .unwrap();
             }
 
@@ -406,7 +406,7 @@ impl App {
                 let mut new_preference = Preferences::new();
                 new_preference.current_device_name = Some(device_name.to_string());
                 gui_tx
-                    .send_blocking(GUIMessage::UpdatePreference(new_preference))
+                    .try_send(GUIMessage::UpdatePreference(new_preference))
                     .unwrap();
 
                 // Should we start recording yet? (will depend of the possible
@@ -414,10 +414,10 @@ impl App {
 
                 if microphone_switch.is_active() || loopback_switch.is_active() {
                     microphone_tx
-                        .send_blocking(MicrophoneMessage::MicrophoneRecordStop)
+                        .try_send(MicrophoneMessage::MicrophoneRecordStop)
                         .unwrap();
                     microphone_tx
-                        .send_blocking(MicrophoneMessage::MicrophoneRecordStart(
+                        .try_send(MicrophoneMessage::MicrophoneRecordStart(
                             device_name.to_owned(),
                         ))
                         .unwrap();
@@ -434,7 +434,7 @@ impl App {
             let mut new_preference = Preferences::new();
             new_preference.buffer_size_secs = Some(adjustment.value() as u64);
             gui_tx
-                .send_blocking(GUIMessage::UpdatePreference(new_preference))
+                .try_send(GUIMessage::UpdatePreference(new_preference))
                 .unwrap();
             None
         });
@@ -447,7 +447,7 @@ impl App {
             let mut new_preference = Preferences::new();
             new_preference.request_interval_secs_v2 = Some(adjustment.value() as u64);
             gui_tx
-                .send_blocking(GUIMessage::UpdatePreference(new_preference))
+                .try_send(GUIMessage::UpdatePreference(new_preference))
                 .unwrap();
             None
         });
@@ -898,7 +898,7 @@ impl App {
                             spinner_row.set_visible(true);
 
                             processing_tx
-                                .send_blocking(ProcessingMessage::ProcessAudioFile(path_str))
+                                .try_send(ProcessingMessage::ProcessAudioFile(path_str))
                                 .unwrap();
                         }
                         Err(error) => {
@@ -1002,7 +1002,7 @@ impl App {
 
         let action_wipe_history = gio::ActionEntry::builder("wipe-history")
             .activate(move |_window, _action, _obj| {
-                gui_tx.send_blocking(GUIMessage::WipeSongHistory).unwrap();
+                gui_tx.try_send(GUIMessage::WipeSongHistory).unwrap();
             })
             .build();
 
@@ -1020,7 +1020,7 @@ impl App {
                 let mut new_preference: Preferences = Preferences::new();
                 new_preference.enable_mpris = Some(new_state);
                 gui_tx
-                    .send_blocking(GUIMessage::UpdatePreference(new_preference))
+                    .try_send(GUIMessage::UpdatePreference(new_preference))
                     .unwrap();
             })
             .build();
@@ -1043,7 +1043,7 @@ impl App {
                 let mut new_preference: Preferences = Preferences::new();
                 new_preference.enable_notifications = Some(new_state);
                 gui_tx
-                    .send_blocking(GUIMessage::UpdatePreference(new_preference))
+                    .try_send(GUIMessage::UpdatePreference(new_preference))
                     .unwrap();
             })
             .build();
