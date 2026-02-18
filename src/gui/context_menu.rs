@@ -3,7 +3,7 @@ use gio::prelude::*;
 use gtk::glib::clone;
 use gtk::prelude::*;
 
-use log::{error, info};
+use log::{error, debug, info};
 use percent_encoding::{utf8_percent_encode, NON_ALPHANUMERIC};
 use std::cell::RefCell;
 use std::rc::Rc;
