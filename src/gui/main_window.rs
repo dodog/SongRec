@@ -105,19 +105,27 @@ impl App {
             .add_from_resource("/re/fossplant/songrec/interface.ui")
             .unwrap();
 
-        let history_list_store = builder.object("history_list_store").unwrap();
+        let history_list_store: gio::ListStore = builder.object("history_list_store").unwrap();
         let song_history_interface = Rc::new(RefCell::new(
             RecognitionHistoryInterface::new(
-                history_list_store,
+                history_list_store.clone(),
                 obtain_recognition_history_csv_path,
             )
             .unwrap(),
         ));
 
-        let favorites_list_store = builder.object("favorites_list_store").unwrap();
+        let history_selection: gtk::SingleSelection = builder.object("history_selection").unwrap();
+        history_selection.set_model(Some(&history_list_store));
+
+        let favorites_list_store: gio::ListStore = builder.object("favorites_list_store").unwrap();
         let favorites_interface = Rc::new(RefCell::new(
-            FavoritesInterface::new(favorites_list_store, obtain_favorites_csv_path).unwrap(),
+            FavoritesInterface::new(favorites_list_store.clone(), obtain_favorites_csv_path)
+                .unwrap(),
         ));
+
+        let favorites_selection: gtk::SingleSelection =
+            builder.object("favorites_selection").unwrap();
+        favorites_selection.set_model(Some(&favorites_list_store));
 
         let ctx_selected_item: Rc<RefCell<Option<HistoryEntry>>> = Rc::new(RefCell::new(None));
         let ctx_buffered_log: Rc<RefCell<String>> = Rc::new(RefCell::new(String::new()));
@@ -240,6 +248,7 @@ impl App {
         ContextMenuUtil::bind_actions(
             self.builder.object("main_window").unwrap(),
             self.ctx_selected_item.clone(),
+            self.song_history_interface.clone(),
             self.favorites_interface.clone(),
         );
 
@@ -823,11 +832,13 @@ impl App {
     fn setup_actions(&self, application: &adw::Application, enable_mpris_cli: bool) {
         let window: adw::ApplicationWindow = self.builder.object("main_window").unwrap();
         let file_picker: gtk::FileDialog = self.builder.object("file_picker").unwrap();
-        let shortcuts_dialog: gtk::ShortcutsWindow = self.builder.object("shortcuts_window").unwrap();
+        let shortcuts_dialog: gtk::ShortcutsWindow =
+            self.builder.object("shortcuts_window").unwrap();
         let about_dialog: adw::AboutDialog = self.builder.object("about_dialog").unwrap();
         let results_label: gtk::Label = self.builder.object("results_label").unwrap();
         let menu_button: gtk::MenuButton = self.builder.object("menu_button").unwrap();
-        let navigation_view: adw::NavigationView = self.builder.object("main_window_pages").unwrap();
+        let navigation_view: adw::NavigationView =
+            self.builder.object("main_window_pages").unwrap();
         let recognize_file_row: adw::PreferencesRow =
             self.builder.object("recognize_file_row").unwrap();
         let spinner_row: adw::PreferencesRow = self.builder.object("spinner_row").unwrap();
@@ -1087,8 +1098,12 @@ impl App {
 
         application.set_accels_for_action("win.close", &["<Ctrl>Q", "<Primary>W"]);
         application.set_accels_for_action("win.recognize-file", &["<Ctrl>O"]);
-        application.set_accels_for_action("win.display-shortcuts", &["<Primary>question", "<Primary>P"]);
-        application.set_accels_for_action("win.show-preferences", &["<Primary>comma", "<Primary>P"]);
+        application.set_accels_for_action(
+            "win.display-shortcuts",
+            &["<Primary>question", "<Primary>P"],
+        );
+        application
+            .set_accels_for_action("win.show-preferences", &["<Primary>comma", "<Primary>P"]);
         application.set_accels_for_action("win.show-menu", &["F10"]);
     }
 
