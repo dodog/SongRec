@@ -11,7 +11,7 @@ use std::rc::Rc;
 use crate::gui::song_history_interface::FavoritesInterface;
 
 use crate::gui::history_entry::HistoryEntry;
-use crate::gui::song_history_interface::{SongRecordInterface, RecognitionHistoryInterface};
+use crate::gui::song_history_interface::{RecognitionHistoryInterface, SongRecordInterface};
 
 pub struct ContextMenuUtil;
 
@@ -202,9 +202,7 @@ impl ContextMenuUtil {
         let action_remove_history = gio::ActionEntry::builder("remove-from-history")
             .activate(move |_, _, _| {
                 if let Some(entry) = &*item.borrow() {
-                    history
-                        .borrow_mut()
-                        .remove(entry.get_song_history_record());
+                    history.borrow_mut().remove(entry.get_song_history_record());
                 }
             })
             .build();

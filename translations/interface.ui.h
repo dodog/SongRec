@@ -41,6 +41,7 @@ char *s = N_("Copy artist and track");
 char *s = N_("Copy artist");
 char *s = N_("Copy track name");
 char *s = N_("Copy album");
+char *s = N_("Delete from History");
 char *s = N_("Add to Favorites");
 char *s = N_("Remove from Favorites");
 char *s = N_("Open SongRec");

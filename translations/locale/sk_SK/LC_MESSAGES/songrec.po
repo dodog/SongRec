@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-16 13:38+0100\n"
+"POT-Creation-Date: 2026-02-18 14:17+0100\n"
 "PO-Revision-Date: 2024-05-16 00:36+0200\n"
 "Last-Translator: Jozef Gaal <preklady@mayday.sk>\n"
 "Language-Team: \n"
@@ -40,7 +40,7 @@ msgstr "Upozornenie: Sieť nedostupná"
 
 #: src/cli_main.rs:161 src/core/http_thread.rs:52 src/core/http_thread.rs:62
 #: src/core/http_thread.rs:75 src/core/http_thread.rs:118
-#: src/gui/main_window.rs:596
+#: src/gui/main_window.rs:605
 msgid "No match for this song"
 msgstr "Žiadna zhoda pre túto skladbu"
 
@@ -183,23 +183,23 @@ msgid "Invalid sample rate passed when encoding Shazam packet"
 msgstr ""
 "Pri kódovaní paketu Shazam bola odovzdaná nesprávna vzorkovacia frekvencia"
 
-#: src/gui/main_window.rs:530 src/gui/main_window.rs:589
+#: src/gui/main_window.rs:539 src/gui/main_window.rs:598
 msgid "Unable to enable MPRIS support"
 msgstr "Nie je možné zapnúť podporu MPRIS"
 
-#: src/gui/main_window.rs:649
+#: src/gui/main_window.rs:658
 msgid "Song recognized"
 msgstr "Skladba rozpoznaná"
 
-#: src/gui/main_window.rs:794
+#: src/gui/main_window.rs:803
 msgid "Are you sure you want to wipe history?"
 msgstr ""
 
-#: src/gui/main_window.rs:795
+#: src/gui/main_window.rs:804
 msgid "_Yes"
 msgstr ""
 
-#: src/gui/main_window.rs:795
+#: src/gui/main_window.rs:804
 msgid "_No"
 msgstr ""
 
@@ -402,18 +402,22 @@ msgid "Copy album"
 msgstr "Kopírovať album"
 
 #: translations/interface.ui.h:44
+msgid "Delete from History"
+msgstr ""
+
+#: translations/interface.ui.h:45
 msgid "Add to Favorites"
 msgstr "Pridať medzi obľúbené"
 
-#: translations/interface.ui.h:45
+#: translations/interface.ui.h:46
 msgid "Remove from Favorites"
 msgstr "Odstrániť z obľúbených"
 
-#: translations/interface.ui.h:46
+#: translations/interface.ui.h:47
 msgid "Open SongRec"
 msgstr ""
 
-#: translations/interface.ui.h:47
+#: translations/interface.ui.h:48
 msgid "Quit..."
 msgstr ""
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-16 13:38+0100\n"
+"POT-Creation-Date: 2026-02-18 14:17+0100\n"
 "PO-Revision-Date: 2022-10-09 13:27+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -40,7 +40,7 @@ msgstr "Warnung: Netzwerk nicht erreichbar"
 
 #: src/cli_main.rs:161 src/core/http_thread.rs:52 src/core/http_thread.rs:62
 #: src/core/http_thread.rs:75 src/core/http_thread.rs:118
-#: src/gui/main_window.rs:596
+#: src/gui/main_window.rs:605
 msgid "No match for this song"
 msgstr "Keine Übereinstimmung für dieses Lied"
 
@@ -184,23 +184,23 @@ msgstr "Ungültiges Frequenzband im dekodierten Shazam Paket"
 msgid "Invalid sample rate passed when encoding Shazam packet"
 msgstr "Ungültige Abtastrate bei der Codierung des Shazam Pakets übergeben"
 
-#: src/gui/main_window.rs:530 src/gui/main_window.rs:589
+#: src/gui/main_window.rs:539 src/gui/main_window.rs:598
 msgid "Unable to enable MPRIS support"
 msgstr "MPRIS Unterstützung kann nicht aktiviert werden"
 
-#: src/gui/main_window.rs:649
+#: src/gui/main_window.rs:658
 msgid "Song recognized"
 msgstr "Lied erkannt"
 
-#: src/gui/main_window.rs:794
+#: src/gui/main_window.rs:803
 msgid "Are you sure you want to wipe history?"
 msgstr ""
 
-#: src/gui/main_window.rs:795
+#: src/gui/main_window.rs:804
 msgid "_Yes"
 msgstr ""
 
-#: src/gui/main_window.rs:795
+#: src/gui/main_window.rs:804
 msgid "_No"
 msgstr ""
 
@@ -403,18 +403,22 @@ msgid "Copy album"
 msgstr "Album kopieren"
 
 #: translations/interface.ui.h:44
-msgid "Add to Favorites"
+msgid "Delete from History"
 msgstr ""
 
 #: translations/interface.ui.h:45
+msgid "Add to Favorites"
+msgstr ""
+
+#: translations/interface.ui.h:46
 msgid "Remove from Favorites"
 msgstr "Von Favoriten entfernen"
 
-#: translations/interface.ui.h:46
+#: translations/interface.ui.h:47
 msgid "Open SongRec"
 msgstr ""
 
-#: translations/interface.ui.h:47
+#: translations/interface.ui.h:48
 msgid "Quit..."
 msgstr ""
 

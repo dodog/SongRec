@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-16 13:38+0100\n"
+"POT-Creation-Date: 2026-02-18 14:17+0100\n"
 "PO-Revision-Date: 2023-12-30 23:42+0900\n"
 "Last-Translator: 이정희 <daemul72@gmail.com>\n"
 "Language-Team: \n"
@@ -39,7 +39,7 @@ msgstr "경고: 네트워크에 연결할 수 없음"
 
 #: src/cli_main.rs:161 src/core/http_thread.rs:52 src/core/http_thread.rs:62
 #: src/core/http_thread.rs:75 src/core/http_thread.rs:118
-#: src/gui/main_window.rs:596
+#: src/gui/main_window.rs:605
 msgid "No match for this song"
 msgstr "이 노래와 일치하는 항목이 없습니다"
 
@@ -173,23 +173,23 @@ msgstr "디코딩된 Shazam 패킷의 주파수 대역이 잘못되었습니다"
 msgid "Invalid sample rate passed when encoding Shazam packet"
 msgstr "Shazam 패킷을 인코딩할 때 잘못된 샘플 속도가 전달되었습니다"
 
-#: src/gui/main_window.rs:530 src/gui/main_window.rs:589
+#: src/gui/main_window.rs:539 src/gui/main_window.rs:598
 msgid "Unable to enable MPRIS support"
 msgstr "MPRIS 지원을 활성화할 수 없습니다"
 
-#: src/gui/main_window.rs:649
+#: src/gui/main_window.rs:658
 msgid "Song recognized"
 msgstr "인식된 노래"
 
-#: src/gui/main_window.rs:794
+#: src/gui/main_window.rs:803
 msgid "Are you sure you want to wipe history?"
 msgstr ""
 
-#: src/gui/main_window.rs:795
+#: src/gui/main_window.rs:804
 msgid "_Yes"
 msgstr ""
 
-#: src/gui/main_window.rs:795
+#: src/gui/main_window.rs:804
 msgid "_No"
 msgstr ""
 
@@ -392,18 +392,22 @@ msgid "Copy album"
 msgstr "앨범 복사하기"
 
 #: translations/interface.ui.h:44
-msgid "Add to Favorites"
+msgid "Delete from History"
 msgstr ""
 
 #: translations/interface.ui.h:45
-msgid "Remove from Favorites"
+msgid "Add to Favorites"
 msgstr ""
 
 #: translations/interface.ui.h:46
-msgid "Open SongRec"
+msgid "Remove from Favorites"
 msgstr ""
 
 #: translations/interface.ui.h:47
+msgid "Open SongRec"
+msgstr ""
+
+#: translations/interface.ui.h:48
 msgid "Quit..."
 msgstr ""
 

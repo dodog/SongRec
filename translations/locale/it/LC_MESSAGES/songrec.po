@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-16 13:38+0100\n"
+"POT-Creation-Date: 2026-02-18 14:17+0100\n"
 "PO-Revision-Date: 2023-09-08 16:03+0200\n"
 "Last-Translator: Gianluca Boiano <morf3089@gmail.com>\n"
 "Language-Team: Albano Battistella  <albano_battistella@hotmail.com>\n"
@@ -42,7 +42,7 @@ msgstr "Avviso: rete irraggiungibile"
 
 #: src/cli_main.rs:161 src/core/http_thread.rs:52 src/core/http_thread.rs:62
 #: src/core/http_thread.rs:75 src/core/http_thread.rs:118
-#: src/gui/main_window.rs:596
+#: src/gui/main_window.rs:605
 msgid "No match for this song"
 msgstr "Nessuna corrispondenza per questo brano"
 
@@ -188,23 +188,23 @@ msgstr ""
 "Frequenza di campionamento non valida passata durante la codifica del "
 "pacchetto Shazam"
 
-#: src/gui/main_window.rs:530 src/gui/main_window.rs:589
+#: src/gui/main_window.rs:539 src/gui/main_window.rs:598
 msgid "Unable to enable MPRIS support"
 msgstr "Impossibile abilitare il supporto MPRIS"
 
-#: src/gui/main_window.rs:649
+#: src/gui/main_window.rs:658
 msgid "Song recognized"
 msgstr "Brano riconosciuto"
 
-#: src/gui/main_window.rs:794
+#: src/gui/main_window.rs:803
 msgid "Are you sure you want to wipe history?"
 msgstr "Sei sicuro di voler cancellare la cronologia?"
 
-#: src/gui/main_window.rs:795
+#: src/gui/main_window.rs:804
 msgid "_Yes"
 msgstr "_Sì"
 
-#: src/gui/main_window.rs:795
+#: src/gui/main_window.rs:804
 msgid "_No"
 msgstr "_No"
 
@@ -407,18 +407,22 @@ msgid "Copy album"
 msgstr "Copia album"
 
 #: translations/interface.ui.h:44
+msgid "Delete from History"
+msgstr ""
+
+#: translations/interface.ui.h:45
 msgid "Add to Favorites"
 msgstr "Aggiungi ai preferiti"
 
-#: translations/interface.ui.h:45
+#: translations/interface.ui.h:46
 msgid "Remove from Favorites"
 msgstr "Riconosci da file"
 
-#: translations/interface.ui.h:46
+#: translations/interface.ui.h:47
 msgid "Open SongRec"
 msgstr ""
 
-#: translations/interface.ui.h:47
+#: translations/interface.ui.h:48
 msgid "Quit..."
 msgstr ""
 
