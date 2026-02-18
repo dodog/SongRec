@@ -125,7 +125,9 @@
                                         <property name="spacing">7</property>
                                         <child>
                                           <object class="GtkLabel" id="results_label">
+                                            <property name="ellipsize">end</property>
                                             <property name="label">Artist - Song name</property>
+                                            <property name="natural-wrap-mode">word</property>
                                             <property name="selectable">True</property>
                                             <attributes>
                                               <attribute name="weight" value="bold"/>
