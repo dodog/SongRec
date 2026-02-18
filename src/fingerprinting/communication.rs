@@ -1,6 +1,6 @@
 use gettextrs::gettext;
 use rand::seq::SliceRandom;
-use reqwest::header::HeaderMap;
+// use reqwest::header::HeaderMap;
 use serde_json::{json, Value};
 use std::env;
 use std::error::Error;
@@ -11,7 +11,7 @@ use uuid::Uuid;
 use crate::fingerprinting::signature_format::DecodedSignature;
 use crate::fingerprinting::user_agent::USER_AGENTS;
 
-pub fn recognize_song_from_signature(
+pub async fn recognize_song_from_signature(
     signature: &DecodedSignature,
 ) -> Result<Value, Box<dyn Error>> {
     let timestamp_ms = SystemTime::now()
@@ -79,7 +79,7 @@ pub fn recognize_song_from_signature(
     Ok(response.json()?)
 }
 
-pub fn obtain_raw_cover_image(url: &str) -> Result<Vec<u8>, Box<dyn Error>> {
+pub async fn obtain_raw_cover_image(url: &str) -> Result<Vec<u8>, Box<dyn Error>> {
     let mut headers = HeaderMap::new();
 
     headers.insert(
@@ -101,7 +101,7 @@ pub fn obtain_raw_cover_image(url: &str) -> Result<Vec<u8>, Box<dyn Error>> {
     Ok(response.bytes()?.as_ref().to_vec())
 }
 
-fn reqwest_client() -> Result<reqwest::blocking::Client, Box<dyn Error>> {
+/* fn reqwest_client() -> Result<reqwest::blocking::Client, Box<dyn Error>> {
     let mut client = reqwest::blocking::Client::builder();
     if let Ok(proxy) = env::var("https_proxy") {
         client = client.proxy(reqwest::Proxy::https(&proxy)?);
@@ -109,4 +109,4 @@ fn reqwest_client() -> Result<reqwest::blocking::Client, Box<dyn Error>> {
         client = client.proxy(reqwest::Proxy::https(&proxy)?);
     };
     Ok(client.build()?)
-}
+} */

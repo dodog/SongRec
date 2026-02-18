@@ -61,7 +61,7 @@ sudo apt install cargo rustc -y
 echo 'export PATH="$HOME/.cargo/bin:$PATH"' | tee -a ~/.profile ~/.bashrc
 source ~/.bashrc
 
-sudo apt install build-essential libasound2-dev libpulse-dev libgtk-4-dev libadwaita-1-dev libdbus-1-dev libssl-dev -y
+sudo apt install build-essential libasound2-dev libpulse-dev libgtk-4-dev libsoup-3.0-dev libadwaita-1-dev libdbus-1-dev -y
 cargo install songrec --no-default-features -F gui,ffmpeg,pulse,mpris
 songrec
 ```
@@ -106,26 +106,26 @@ rustup update
 Debian:
 
 ```bash
-sudo apt install build-essential libasound2-dev libpulse-dev libgtk-4-dev libadwaita-1-dev libdbus-1-dev libssl-dev intltool
+sudo apt install build-essential libasound2-dev libpulse-dev libgtk-4-dev libsoup-3.0-dev libadwaita-1-dev libdbus-1-dev intltool
 ```
 
 Void Linux (libressl):
 
 ```shell
-sudo xbps-install base-devel alsa-lib-devel pulseaudio-devel gtk4-devel libadwaita-devel dbus-devel libressl-devel intltool
+sudo xbps-install base-devel alsa-lib-devel pulseaudio-devel gtk4-devel libsoup3-devel libadwaita-devel dbus-devel libressl-devel intltool
 ```
 
 Void Linux (openssl):
 
 ```shell
-sudo xbps-install base-devel alsa-lib-devel pulseaudio-devel gtk4-devel libadwaita-devel dbus-devel openssl-devel intltool
+sudo xbps-install base-devel alsa-lib-devel pulseaudio-devel gtk4-devel libsoup3-devel libadwaita-devel dbus-devel openssl-devel intltool
 ```
 
 Fedora Linux:
 
 ```shell
 sudo dnf groupinstall "Development Tools"
-sudo dnf install alsa-lib-devel pulseaudio-libs-devel openssl-devel dbus-devel pkgconf-pkg-config glib gtk4-devel libadwaita-devel
+sudo dnf install alsa-lib-devel pulseaudio-libs-devel pkgconf-pkg-config glib gtk4-devel libsoup3-devel libadwaita-devel dbus-devel openssl-devel
 ```
 
 ### Compiling the project

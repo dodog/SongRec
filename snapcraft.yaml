@@ -69,11 +69,11 @@ parts:
     build-packages:
       - libasound2-dev
       - libgtk-4-dev
+      - libsoup-3.0-dev
       - libdbus-1-dev
       - libadwaita-1-dev
       - libpulse-dev
       - librsvg2-dev
-      - libssl-dev
       - libffi-dev
 
     stage-packages:
@@ -81,6 +81,7 @@ parts:
       - pipewire-alsa
       - libasound2
       - libgtk-4-1
+      - libsoup-3.0-0
       - libadwaita-1-0
       - libpulse0
       - gir1.2-gtk-4.0
