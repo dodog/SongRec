@@ -15,7 +15,7 @@ Features:
 
 <p align="center"><a href="https://flathub.org/en/apps/re.fossplant.songrec"><img src="packaging/flathub_badge_black.svg?raw=true"></a></p>
 
-A (command-line only) Python version, which I made before rewriting in Rust for performance, is also available for demonstration purposes. It supports file recognition only.
+A (command-line only) [Python version](python-version), which I made before rewriting in Rust for performance, is also available for demonstration purposes. It supports file recognition only.
 
 ## How it works
 
