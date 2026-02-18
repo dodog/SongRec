@@ -11,7 +11,7 @@ mod fingerprinting {
 }
 
 mod core {
-    pub mod http_thread;
+    pub mod http_task;
     pub mod logging;
     pub mod microphone_thread;
     pub mod processing_thread;
@@ -62,6 +62,7 @@ use crate::utils::internationalization::setup_internationalization;
 
 use clap::{command, Arg, ArgAction, Command};
 use gettextrs::gettext;
+use soup::prelude::SessionExt;
 use std::error::Error;
 
 macro_rules! base_app {
@@ -86,7 +87,7 @@ SongRec {version}
                 .short('v')
                 .long("verbose")
                 .action(ArgAction::Count)
-                .help(gettext("-v: Set the log level to DEBUG instead of WARN for SongRec-related messages\n\
+                .help(gettext("-v: Set the log level to DEBUG instead of INFO for SongRec-related messages\n\
 -vv: Set the log level to DEBUG for SongRec-related messages and INFO for library-related messages\n\
 -vvv: Set the log level to TRACE"))
         )
@@ -256,7 +257,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Set up logging
 
     let log_object: Logging = match args.get_count("verbose") {
-        0 => Logging::setup_logging(log::LevelFilter::Warn, log::LevelFilter::Warn),
+        0 => Logging::setup_logging(log::LevelFilter::Warn, log::LevelFilter::Info),
         1 => Logging::setup_logging(log::LevelFilter::Warn, log::LevelFilter::Debug),
         2 => Logging::setup_logging(log::LevelFilter::Info, log::LevelFilter::Debug),
         _ => Logging::setup_logging(log::LevelFilter::Trace, log::LevelFilter::Trace),
@@ -272,14 +273,29 @@ fn main() -> Result<(), Box<dyn Error>> {
                 .subcommand_matches("audio-file-to-recognized-song")
                 .unwrap();
 
-            let input_file_string = subcommand_args.get_one::<String>("input_file").unwrap();
+            let session = soup::Session::new();
+            session.set_timeout(20);
 
-            println!(
-                "{}",
-                serde_json::to_string_pretty(&recognize_song_from_signature(
-                    &SignatureGenerator::make_signature_from_file(input_file_string)?
-                )?)?
-            );
+            let input_file_string = subcommand_args.get_one::<String>("input_file").unwrap().clone();
+
+            let main_context = glib::MainContext::new();
+            let main_loop = glib::MainLoop::new(Some(&main_context), false);
+            main_context.spawn_local(async move {
+                println!(
+                    "{}",
+                    serde_json::to_string_pretty(
+                        &recognize_song_from_signature(
+                            &session,
+                            &SignatureGenerator::make_signature_from_file(&input_file_string)
+                                .unwrap()
+                        )
+                        .await
+                        .unwrap()
+                    )
+                    .unwrap()
+                );
+            });
+            main_loop.run();
         }
         Some("audio-file-to-fingerprint") => {
             let subcommand_args = args
@@ -298,14 +314,28 @@ fn main() -> Result<(), Box<dyn Error>> {
                 .subcommand_matches("fingerprint-to-recognized-song")
                 .unwrap();
 
-            let fingerprint_string = subcommand_args.get_one::<String>("fingerprint").unwrap();
+            let fingerprint_string = subcommand_args.get_one::<String>("fingerprint").unwrap().clone();
 
-            println!(
-                "{}",
-                serde_json::to_string_pretty(&recognize_song_from_signature(
-                    &DecodedSignature::decode_from_uri(fingerprint_string)?
-                )?)?
-            );
+            let session = soup::Session::new();
+            session.set_timeout(20);
+
+            let main_context = glib::MainContext::new();
+            let main_loop = glib::MainLoop::new(Some(&main_context), false);
+            main_context.spawn_local(async move {
+                println!(
+                    "{}",
+                    serde_json::to_string_pretty(
+                        &recognize_song_from_signature(
+                            &session,
+                            &DecodedSignature::decode_from_uri(&fingerprint_string).unwrap()
+                        )
+                        .await
+                        .unwrap()
+                    )
+                    .unwrap()
+                );
+            });
+            main_loop.run();
         }
         Some("listen") => {
             let subcommand_args = args.subcommand_matches("listen").unwrap();

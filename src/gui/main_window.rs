@@ -10,7 +10,7 @@ use std::error::Error;
 use std::rc::Rc;
 use std::sync::{Arc, Mutex};
 
-use crate::core::http_thread::http_thread;
+use crate::core::http_task::http_task;
 use crate::core::logging::Logging;
 use crate::core::microphone_thread::microphone_thread;
 use crate::core::processing_thread::processing_thread;
@@ -140,7 +140,7 @@ impl App {
         buffer_size_value.set_value(old_preferences.buffer_size_secs.unwrap() as f64);
 
         let request_interval_value: gtk::Adjustment = builder.object("interval_value").unwrap();
-        request_interval_value.set_value(old_preferences.request_interval_secs.unwrap() as f64);
+        request_interval_value.set_value(old_preferences.request_interval_secs_v2.unwrap() as f64);
 
         App {
             builder,
@@ -445,7 +445,7 @@ impl App {
             let adjustment = values[0].get::<gtk::Adjustment>().unwrap();
             debug!("Request interval set to: {}", adjustment.value());
             let mut new_preference = Preferences::new();
-            new_preference.request_interval_secs = Some(adjustment.value() as u64);
+            new_preference.request_interval_secs_v2 = Some(adjustment.value() as u64);
             gui_tx
                 .send_blocking(GUIMessage::UpdatePreference(new_preference))
                 .unwrap();
@@ -491,9 +491,7 @@ impl App {
         let http_rx = self.http_rx.clone();
         let gui_tx = self.gui_tx.clone();
         let microphone_tx = self.microphone_tx.clone();
-        spawn_big_thread(move || {
-            http_thread(http_rx, gui_tx, microphone_tx);
-        });
+        glib::spawn_future_local(http_task(http_rx, gui_tx, microphone_tx));
 
         let gui_rx = self.gui_rx.clone();
         let preferences_interface_ptr = self.preferences_interface.clone();
