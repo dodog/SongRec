@@ -1,6 +1,7 @@
 use adw::prelude::*;
 use chrono::Local;
 use gettextrs::gettext;
+use serde_json::json;
 use log::{debug, error, info, trace};
 #[cfg(feature = "mpris")]
 use mpris_player::PlaybackStatus;
@@ -559,7 +560,23 @@ impl App {
                 } else {
                     if let MicrophoneVolumePercent(_) = gui_message {
                         trace!("Received GUI message: {:?}", gui_message);
-                    } else {
+                    }
+                    else if let SongRecognized(ref msg) = gui_message {
+                        debug!("Received GUI message: SongRecognized({})", json!({
+                            "artist_name": msg.artist_name.clone(),
+                            "album_name": msg.album_name.clone(),
+                            "song_name": msg.song_name.clone(),
+                            "cover_image": match &msg.cover_image {
+                                Some(data) => Some::<String>(format!("{:02x?}...", &data[..16]).into()),
+                                None => None
+                            },
+                            "track_key": msg.track_key.clone(),
+                            "release_year": msg.release_year.clone(),
+                            "genre": msg.genre.clone(),
+                            "shazam_json": msg.shazam_json.clone()
+                        }).to_string());
+                    }
+                    else {
                         debug!("Received GUI message: {:?}", gui_message);
                     }
 
