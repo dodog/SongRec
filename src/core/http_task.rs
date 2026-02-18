@@ -94,12 +94,12 @@ fn try_recognize_song(
     })
 }
 
-pub fn http_thread(
+pub async fn http_task(
     http_rx: async_channel::Receiver<HTTPMessage>,
     gui_tx: async_channel::Sender<GUIMessage>,
     microphone_tx: async_channel::Sender<MicrophoneMessage>,
 ) {
-    while let Ok(message) = http_rx.recv_blocking() {
+    while let Ok(message) = http_rx.recv_blocking() { XX USE SOUP3 CF. https://github.com/marin-m/SongRec/issues/223
         match message {
             HTTPMessage::RecognizeSignature(signature) => {
                 match try_recognize_song(*signature) {
