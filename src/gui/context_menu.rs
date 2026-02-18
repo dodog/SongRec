@@ -39,7 +39,7 @@ impl ContextMenuUtil {
             move |_: &gtk::GestureClick, _n, x, y| {
                 // gesture.set_state(gtk::EventSequenceState::Claimed);
                 // let cached_record = interface.borrow().get_hovered_record();
-                info!("Selected item: {:?}", selection.selected_item());
+                debug!("Selected item: {:?}", selection.selected_item());
                 // info!("Selected item (cached): {:?}", cached_record);
                 if let Some(record) = selection.selected_item() {
                     let record = record.downcast::<HistoryEntry>().unwrap();
