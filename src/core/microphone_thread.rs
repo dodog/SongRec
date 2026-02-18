@@ -225,7 +225,7 @@ fn write_data<T, U>(
 
     let preferences = preferences_interface.lock().unwrap().preferences.clone();
     let buffer_size_secs = preferences.buffer_size_secs.unwrap() as usize;
-    let request_interval_secs = preferences.request_interval_secs_v2.unwrap() as usize;
+    let request_interval_secs = preferences.request_interval_secs_v3.unwrap() as usize;
 
     let twelve_seconds_buffer = &mut twelve_seconds_buffer[..16000 * buffer_size_secs];
 

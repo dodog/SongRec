@@ -141,7 +141,7 @@ impl App {
         buffer_size_value.set_value(old_preferences.buffer_size_secs.unwrap() as f64);
 
         let request_interval_value: gtk::Adjustment = builder.object("interval_value").unwrap();
-        request_interval_value.set_value(old_preferences.request_interval_secs_v2.unwrap() as f64);
+        request_interval_value.set_value(old_preferences.request_interval_secs_v3.unwrap() as f64);
 
         App {
             builder,
@@ -446,7 +446,7 @@ impl App {
             let adjustment = values[0].get::<gtk::Adjustment>().unwrap();
             debug!("Request interval set to: {}", adjustment.value());
             let mut new_preference = Preferences::new();
-            new_preference.request_interval_secs_v2 = Some(adjustment.value() as u64);
+            new_preference.request_interval_secs_v3 = Some(adjustment.value() as u64);
             gui_tx
                 .try_send(GUIMessage::UpdatePreference(new_preference))
                 .unwrap();

@@ -15,7 +15,8 @@ pub struct Preferences {
     pub enable_mpris: Option<bool>,
     pub buffer_size_secs: Option<u64>,
     pub request_interval_secs: Option<u64>, // Legacy, before increasing default from 4 to 10
-    pub request_interval_secs_v2: Option<u64>,
+    pub request_interval_secs_v2: Option<u64>, // before decreasing from 10 to 8
+    pub request_interval_secs_v3: Option<u64>,
     pub current_device_name: Option<String>,
 }
 
@@ -27,6 +28,7 @@ impl Preferences {
             buffer_size_secs: None,
             request_interval_secs: None,
             request_interval_secs_v2: None,
+            request_interval_secs_v3: None,
             current_device_name: None,
         }
     }
@@ -37,7 +39,8 @@ impl Preferences {
             enable_mpris: Some(false),
             buffer_size_secs: Some(12),
             request_interval_secs: None,
-            request_interval_secs_v2: Some(interval),
+            request_interval_secs_v2: None,
+            request_interval_secs_v3: Some(interval),
             current_device_name: None,
         }
     }
@@ -50,7 +53,8 @@ impl Default for Preferences {
             enable_mpris: Some(false),
             buffer_size_secs: Some(12),
             request_interval_secs: None,
-            request_interval_secs_v2: Some(10),
+            request_interval_secs_v2: None,
+            request_interval_secs_v3: Some(8),
             current_device_name: None,
         }
     }
@@ -109,14 +113,20 @@ impl PreferencesInterface {
                 .buffer_size_secs
                 .or(current_preferences.buffer_size_secs),
             request_interval_secs: None,
-            request_interval_secs_v2: update_preferences
+            request_interval_secs_v2: None,
+            request_interval_secs_v3: update_preferences
                 .request_interval_secs_v2
                 .or(match current_preferences.request_interval_secs {
                     Some(4) => None,
                     Some(val) => Some(val),
                     None => None,
                 })
-                .or(current_preferences.request_interval_secs_v2),
+                .or(match current_preferences.request_interval_secs_v2 {
+                    Some(10) => None,
+                    Some(val) => Some(val),
+                    None => None,
+                })
+                .or(current_preferences.request_interval_secs_v3),
             current_device_name: update_preferences
                 .current_device_name
                 .or(current_preferences.current_device_name),
