@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-19 07:53+0100\n"
-"PO-Revision-Date: 2026-02-18 16:47+0000\n"
+"PO-Revision-Date: 2026-02-19 06:58+0000\n"
 "Last-Translator: Marin <25437947+marin-m@users.noreply.github.com>\n"
 "Language-Team: French <https://weblate.fossplant.re/projects/songrec/songrec/"
 "fr/>\n"
@@ -214,15 +214,15 @@ msgstr ""
 
 #: src/gui/main_window.rs:239
 msgid "Application error"
-msgstr ""
+msgstr "Erreur de l'application"
 
 #: src/gui/main_window.rs:260
 msgid "Network error"
-msgstr ""
+msgstr "Erreur réseau"
 
 #: src/gui/main_window.rs:297
 msgid "Unable to enable notification icon"
-msgstr ""
+msgstr "Impossible d'activer l'icône de notification"
 
 #: src/gui/main_window.rs:629 src/gui/main_window.rs:702
 msgid "Unable to enable MPRIS support"
@@ -312,7 +312,7 @@ msgstr "Rechercher..."
 
 #: translations/interface.ui.h:11
 msgid "Refresh available devices"
-msgstr ""
+msgstr "Actualiser les périphériques disponibles"
 
 #: translations/interface.ui.h:12
 msgid "Audio input"
@@ -419,7 +419,7 @@ msgstr "Empêcher les doublons dans l'historique"
 
 #: translations/interface.ui.h:33
 msgid "Network preferences"
-msgstr ""
+msgstr "Préférences réseau"
 
 #: translations/interface.ui.h:34
 msgid "By default 8, increase if you are rate-limited"
