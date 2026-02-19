@@ -64,6 +64,7 @@ pub enum GUIMessage {
 
 pub enum MicrophoneMessage {
     MicrophoneRecordStart(String), // The argument is the audio device name
+    RefreshDevices,
     MicrophoneRecordStop,
     ProcessingDone,
 }

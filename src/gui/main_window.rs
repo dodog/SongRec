@@ -20,12 +20,12 @@ use crate::core::thread_messages::{GUIMessage::*, *};
 use crate::gui::song_history_interface::FavoritesInterface;
 
 use crate::gui::song_history_interface::{RecognitionHistoryInterface, SongRecordInterface};
+#[cfg(feature = "mpris")]
+use crate::plugins::mpris_player::{get_player, update_song};
 use crate::utils::csv_song_history::SongHistoryRecord;
 use crate::utils::filesystem_operations::{
     obtain_favorites_csv_path, obtain_recognition_history_csv_path,
 };
-#[cfg(feature = "mpris")]
-use crate::plugins::mpris_player::{get_player, update_song};
 
 use crate::gui::preferences::{Preferences, PreferencesInterface};
 
@@ -1112,6 +1112,16 @@ impl App {
             })
             .build();
 
+        let microphone_tx = self.microphone_tx.clone();
+
+        let action_refresh_devices = gio::ActionEntry::builder("refresh-devices")
+            .activate(move |_, _, _| {
+                microphone_tx
+                    .try_send(MicrophoneMessage::RefreshDevices)
+                    .unwrap();
+            })
+            .build();
+
         let action_show_menu = gio::ActionEntry::builder("show-menu")
             .activate(move |_, _, _| {
                 menu_button.activate();
@@ -1129,6 +1139,7 @@ impl App {
             action_show_preferences,
             action_notification_setting,
             action_no_dupes_setting,
+            action_refresh_devices,
             action_close,
             action_show_menu,
         ]);

@@ -48,11 +48,11 @@ mod utils {
 }
 
 mod plugins {
-    #[cfg(feature = "mpris")]
-    pub mod mpris_player;
     #[cfg(feature = "gui")]
     #[cfg(unix)]
     pub mod ksni;
+    #[cfg(feature = "mpris")]
+    pub mod mpris_player;
 }
 
 use crate::fingerprinting::algorithm::SignatureGenerator;

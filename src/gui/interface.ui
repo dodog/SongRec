@@ -172,6 +172,13 @@
                             <property name="spacing">15</property>
                             <child>
                               <object class="AdwPreferencesGroup" id="input_device_section">
+                                <property name="header-suffix">
+                                  <object class="GtkButton" id="refresh_devices">
+                                    <property name="action-name">win.refresh-devices</property>
+                                    <property name="icon-name">view-refresh-symbolic</property>
+                                    <property name="tooltip-text" translatable="yes">Refresh available devices</property>
+                                  </object>
+                                </property>
                                 <property name="title" translatable="yes">Audio input</property>
                                 <property name="visible">False</property>
                                 <child>
@@ -377,6 +384,7 @@
                         <property name="has-tooltip">True</property>
                         <property name="icon-name">open-menu-symbolic</property>
                         <property name="menu-model">main_menu_model</property>
+                        <property name="primary">True</property>
                         <property name="tooltip-text" translatable="yes">Application menu</property>
                       </object>
                     </child>
@@ -578,7 +586,7 @@
                         <child>
                           <object class="AdwSwitchRow" id="systray_setting">
                             <property name="action-name">win.systray-setting</property>
-                            <property name="subtitle" translatable="yes">When closing the window, minimize to system tray using KSNI instead of closing the app. Please note that you may have to increase the "request interval" setting when leaving SongRec running in the background to reduce your changes of getting rate-limited.</property>
+                            <property name="subtitle" translatable="yes">When closing the window, minimize to system tray using libayatana-appindicator instead of closing the app. Please note that you may have to increase the "request interval" setting when leaving SongRec running in the background to reduce your changes of getting rate-limited.</property>
                             <property name="title" translatable="yes">Minimize to system tray</property>
                             <property name="visible">False</property>
                           </object>
