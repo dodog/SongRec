@@ -1206,6 +1206,7 @@ impl App {
             .build();
 
         let gui_tx = self.gui_tx.clone();
+        #[cfg(target_os = "linux")]
         let ctx_systray_handle = self.ctx_systray_handle.clone();
 
         #[cfg(target_os = "linux")]
